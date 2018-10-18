@@ -15,8 +15,6 @@ class Speaker {
     String bio
     LocalDate birthday
 
-    static hasMany = [talks: Talk]
-
     static graphql = GraphQLMapping.build {
 
         property 'lastName', order: 1 //<1>
@@ -50,7 +48,6 @@ class Speaker {
     static mapping = {
         bio type: 'text'
         name formula: 'concat(FIRST_NAME,\' \',LAST_NAME)'
-        talks sort: 'id'
     }
 
 }
