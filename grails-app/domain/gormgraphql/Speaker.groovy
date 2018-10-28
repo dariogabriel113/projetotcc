@@ -5,39 +5,26 @@ import org.grails.gorm.graphql.entity.dsl.GraphQLMapping
 import java.time.LocalDate
 import java.time.Period
 
-@Resource(uri='/speaker')
+@Resource(uri = '/speaker')
 class Speaker {
 
-    String firstName
-    String lastName
-    String name
+    String nome
+    String sobrenome
+    String nomeCompleto
     String email
     String bio
     LocalDate birthday
 
+    static hasMany = [talks: Talk]
+
     static graphql = GraphQLMapping.build {
 
-        property 'lastName', order: 1 //<1>
-        property 'firstName', order: 2
-        property 'email', order: 3
-
-        exclude 'birthday' //<2>
-
-        property 'name', deprecationReason: 'To be removed August 1st, 2018' //<3>
-
-        property('bio') { //<4>
-            order 4
-            dataFetcher { Speaker speaker ->
-                speaker.bio ?: "No biography provided"
-            }
-        }
-
-        add('age', Integer) { //<5>
-            dataFetcher { Speaker speaker ->
-                Period.between(speaker.birthday, LocalDate.now()).years
-            }
-            input false
-        }
+        property 'nome', order: 1
+        property 'sobrenome', order: 2
+        property 'nomeCompleto', order: 3
+        property 'email', order: 4
+        property 'bio', order: 5
+        property 'birthday', order: 6
     }
 
     static constraints = {
@@ -46,8 +33,12 @@ class Speaker {
     }
 
     static mapping = {
+        nome type: 'text'
+        sobrenome type: 'text'
+        nomeCompleto type: 'text'
+        email type: 'text'
         bio type: 'text'
-        name formula: 'concat(FIRST_NAME,\' \',LAST_NAME)'
+        talks sort: 'id'
     }
 
 }

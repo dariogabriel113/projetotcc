@@ -7,6 +7,10 @@ import java.time.LocalDate
 @CompileStatic
 @Service(Speaker)
 interface SpeakerDataService {
-    Speaker save(String firstName, String lastName, LocalDate birthday, String email, String bio)
-    Speaker save(String firstName, String lastName, LocalDate birthday, String email)
+    Speaker save(String nome,
+                 String sobrenome,
+                 String nomeCompleto,
+                 String email,
+                 String bio,
+                 LocalDate birthday)
 }

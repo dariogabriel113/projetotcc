@@ -11,15 +11,22 @@ class BootStrap {
 
     SpeakerDataService speakerDataService
 
+    TalkDataService talkDataService
+
     def init = { servletContext ->
         log.info "Populating database..."
 
-        for (int i = 0; i < 1000; i++){
-            Speaker jeff = speakerDataService.save('Jeff', 'Brown', LocalDate.of(1975, 11, 15), 'brownj@objectcomputing.com', 'Jeff Brown is an author and tech lead at OCI')
-            Speaker graeme = speakerDataService.save('Graeme', 'Rocher', LocalDate.of(1978, 1, 1), 'rocherg@objectcomputing.com', 'Graeme Rocher is the tech lead for the Grails project')
-            Speaker zak = speakerDataService.save('Zachary', 'Klein', LocalDate.of(1989, 2, 23), 'kleinz@objectcomputing.com')
+        for (int i = 0; i < 10; i++) {
+            Speaker speaker = speakerDataService.save(i.toString() + ' Graeme', 'Rocher', 'Graeme Rocher', 'rocherg@objectcomputing.com', 'Graeme Rocher is the tech lead for the Grails project', LocalDate.of(1975, 11, 15))
+
+            for (int j = 0; j < 950; j++) {
+                talkDataService.save('Testing with Grails 3', j * 10, speaker)
+                talkDataService.save('Polyglot Development with Grails 3', j * 9, speaker)
+            }
         }
+
     }
+
     def destroy = {
     }
 }

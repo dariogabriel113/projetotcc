@@ -11,8 +11,9 @@ class SpeakerList extends Component {
     }
 }
 
-export const SPEAKER_QUERY = gql`query {	speakerList(max: 500) {
-	  id, firstName, lastName
+export const SPEAKER_QUERY = gql`query {	speakerList(max: 10) {
+    nome, sobrenome, nomeCompleto, email, bio,
+    talks { id }
 	} 
 }`;
 
