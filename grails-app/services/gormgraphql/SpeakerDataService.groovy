@@ -11,6 +11,5 @@ interface SpeakerDataService {
                  String sobrenome,
                  String nomeCompleto,
                  String email,
-                 String bio,
-                 LocalDate birthday)
+                 String bio)
 }
